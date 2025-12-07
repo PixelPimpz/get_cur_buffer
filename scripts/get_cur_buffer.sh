@@ -3,8 +3,8 @@ tmux display -p "get-cur-buffer called"
 main() {
   local SOCKS="/run/user/1000"
   local PANE_PID="$(tmux display -p "#{pane_pid}")"
-  local SOCKET="$(ls ${SOCKS} | grep "${PANE_PID}"
+  #local SOCKET="$(ls ${SOCKS} | grep "${PANE_PID}"
   tmux display -p "PANE_PID: ${PANE_PID}"
-  tmux display -p "SOCKET: ${SOCKET}"
+  #tmux display -p "SOCKET: ${SOCKET}"
 }
 main
