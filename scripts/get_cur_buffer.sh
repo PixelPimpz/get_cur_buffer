@@ -5,7 +5,9 @@ main() {
   local SOCKS="/run/user/1000"
   local PANE_PID="$(tmux display -p "#{pane_pid}")"
   local SOCKET="$(ls "${SOCKS}" | grep "${PANE_PID}")"
-  (( $DEBUG == 1 )) && debug 
+  if (( $DEBUG == 1 )); then
+    debug 
+  fi
 }
 
 debug() {
