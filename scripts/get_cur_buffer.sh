@@ -7,7 +7,7 @@ main() {
   local SOCKET="$(ls "${SOCKS}" | grep "${PANE_PID}")"
   #local BUF_NAME="$( nvim --server "${SOCKET}" --remote-expr 'bufname("%:t")' )"
   echo "bubba"
-  tmux display -p "$(nvim --server "${SOCKET}" --remote-expr 'bufname("%:t")')"
+  echo ">> $(nvim --server "${SOCKET}" --remote-expr 'bufname("%:t")')"
   if (( $DEBUG == 1 )); then 
     debug 
   fi
