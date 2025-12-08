@@ -10,6 +10,7 @@ main() {
   if (( $DEBUG == 1 )); then 
     debug 
   fi
+#667978
 }
 
 debug() {
