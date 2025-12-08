@@ -11,6 +11,7 @@ main() {
 }
 
 debug() {
+  echo "${@SOCKET}"
   tmux display -p "SOCKET: ${SOCKET}"
 }
 
