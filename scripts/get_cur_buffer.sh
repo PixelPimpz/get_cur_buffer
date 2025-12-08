@@ -15,5 +15,6 @@ debug() {
   tmux display -p "PANE_PID: ${PANE_PID}"
   tmux display -p "SOCKS: ${SOCKS}"
   tmux display -p "SOCKET: ${SOCKET}"
+  tmux display -p "BUF_NAME: ${BUF_NAME}"
 }
 main
