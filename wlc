@@ -1,0 +1,1 @@
+ nvim --server "${SOCKET}" --remote-expr 'bufname("%:t")'
