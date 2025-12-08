@@ -14,4 +14,10 @@ debug() {
   tmux display -p "SOCKET: ${SOCKET}"
 }
 
+fatal() {
+  [[ -n "$1" ]] && local E="unknown error" || local E="$1"
+  printf 'ERROR: %s\n' "$E" >&2
+  exit 1
+}
+
 main
