@@ -7,7 +7,7 @@ main() {
   local PROC="$(ps -h --ppid "${PANE_PID}" -o cmd | awk '{print $1}')"  
 
   if [[ "${PROC}" == "nvim" ]]; then
-    local ICON="$( grep -e ${PROC} ${ICONS} )"
+    local ICON="$( cat "${ICONS}" | grep "${PROC}" )"
     local SOCKET="/tmp/$(ls /tmp | grep -E "${PANE_PID}")"
     local BUF_NAME="$( nvim --server ${SOCKET} --remote-expr 'expand("%:t")' )"
     
