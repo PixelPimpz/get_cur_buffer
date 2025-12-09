@@ -1,23 +1,30 @@
 #!/usr/bin/env bash
-tmux display -p "get-cur-buffer called"
 DEBUG=$1
+ICONS="../lib/app-icons.yml"
+
 main() {
   local PANE_PID="$(tmux display -p "#{pane_pid}")"
-  local SOCKET="/tmp/$(ls /tmp | grep -E "${PANE_PID}")"
   local PROC="$(ps -h --ppid "${PANE_PID}" -o cmd | awk '{print $1}')"  
-  # -o cmd | awk '{print $1}')"
-  #echo "$(ps -h --ppid "${PANE_PID}" -o cmd | awk '{print $1}')"
-  #echo "$(ps -h --ppid "${PANE_PID}" -o cmd )"
-  local BUF_NAME="$( nvim --server ${SOCKET} --remote-expr 'expand("%:t")' )"
-  if (( $DEBUG == 1 )); then 
-    debug "SOCKET: ${SOCKET}"
-    debug "PROC: ${PROC}"
-    [[ -n "${BUF_NAME}" ]] && debug "BUF_NAME: ${BUF_NAME}" || fatal "bufname not found."  
+
+  if [[ "${PROC}" == "nvim" ]]; then
+    local ICON="$( grep -e "${PROC}" "${ICONS}" | sed 's/^.*://' )"
+    local SOCKET="/tmp/$(ls /tmp | grep -E "${PANE_PID}")"
+    local BUF_NAME="$( nvim --server ${SOCKET} --remote-expr 'expand("%:t")' )"
+    
+    if (( $DEBUG == 1 )); then 
+      debug "SOCKET: ${SOCKET}"
+      debug "PROC: ${PROC}"
+      debug "ICON: ${ICON}"
+      [[ -n "${BUF_NAME}" ]] && debug "BUF_NAME: ${BUF_NAME}" || fatal "bufname not found."  
+    fi
+
   fi
+
 }
 
 set_status() {
   local STATUS="crack"
+  tmux set -g @CurrentData "${STATUS}"
 }
 
 debug() {
