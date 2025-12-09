@@ -2,8 +2,8 @@
 tmux display -p "get-cur-buffer called"
 DEBUG=$1
 main() {
-  local SOCK_GEN="$(tmux display -p "/tmp/nvim-#{pane_pid}")"
-  local SOCKET="$(ls /tmp | grep -E "${SOCK_GEN##*-}")"
+  local SOCK_GEN="$(tmux display -p "nvim-#{pane_pid}")"
+  local SOCKET="/tmp/$(ls /tmp | grep -E "${SOCK_GEN##*-}")"
 #  local BUF_NAME="$( nvim --server ${SOCKET} --remote-expr 'bufname("%:t")' )"
   if (( $DEBUG == 1 )); then 
     debug "SOCK_GEN: ${SOCK_GEN}"
