@@ -22,13 +22,12 @@ main() {
       debug "ICON: ${ICON}"
       [[ -n "${BUF_NAME}" ]] && debug "BUF_NAME: ${BUF_NAME}" || fatal "bufname not found."  
     fi
-
+    set_status "${BUF_NAME}"
   fi
-
 }
 
 set_status() {
-  local STATUS="crack"
+  local STATUS="$1"
   tmux set -g @CurrentData "${STATUS}"
 }
 
