@@ -1,20 +1,23 @@
 #!/usr/bin/env bash
 DEBUG=$1
-ICONS="./lib/app-icons.yml"
+CURRENT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+ICONS="${CURRENT_DIR}../lib/app-icons.yml"
+YQ_BIN='/usr/bin/yq'
 
 main() {
   local PANE_PID="$(tmux display -p "#{pane_pid}")"
   local PROC="$(ps -h --ppid "${PANE_PID}" -o cmd | awk '{print $1}')"  
   if [[ "${PROC}" == "nvim" ]]; then
-    yq -o=shell ../lib/app-icons.yaml 
-    local I="$(yq '.icons.nvim' ../lib/app-icons.yaml)"
+    local ICON="$("${YQ_BIN}" '.icons.nvim' "${ICONS}")"
+    [[ ! command -v "${YQ_BIN}" &> /dev/null ]] && fatal "yq failed"
+    
     local SOCKET="/tmp/$(ls /tmp | grep -E "${PANE_PID}")"
     local BUF_NAME="$( nvim --server ${SOCKET} --remote-expr 'expand("%:t")' )"
     
     if (( $DEBUG == 1 )); then 
       debug "SOCKET: ${SOCKET}"
       debug "PROC: ${PROC}"
-      debug "ICON: $I"
+      debug "ICON: ${ICON}"
       [[ -n "${BUF_NAME}" ]] && debug "BUF_NAME: ${BUF_NAME}" || fatal "bufname not found."  
     fi
 
