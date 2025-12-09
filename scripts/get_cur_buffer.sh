@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 CURRENT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+PLUG_ROOT="$CURRENT_DIR/../.."
 ICONS="${CURRENT_DIR}/../lib/app-icons.yml"
 YQ_BIN='/usr/bin/yq'
 
@@ -23,6 +24,7 @@ main() {
     local BUF_NAME="$( nvim --server ${SOCKET} --remote-expr 'expand("%:t")' )"
     
     if (( $DEBUG == 1 )); then 
+      debug "PLUG_ROOT: ${PLUG_ROOT}"
       debug "SOCKET: ${SOCKET}"
       debug "PROC: ${PROC}"
       debug "ICONS: ${ICONS}"
