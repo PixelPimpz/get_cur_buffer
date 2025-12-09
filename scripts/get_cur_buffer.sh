@@ -7,15 +7,14 @@ main() {
   tmux display -p "$(ls /tmp | grep "nvim" )"
 #  local BUF_NAME="$( nvim --server ${SOCKET} --remote-expr 'bufname("%:t")' )"
   if (( $DEBUG == 1 )); then 
-    local varname = "${!SOCK_GEN}"
-    debug "${varname}: ${SOCK_GEN}"
+    debug "SOCK_GEN: ${SOCK_GEN}"
     [[ -n "${BUF_NAME}" ]] && fatal "bufname not found." || debug "${BUF_NAME}"
   fi
 }
 
 debug() {
-  printf '$?: %s\n$#: %s\n$0: %s \n$@: %s\n' "$?" "$#" "$0" "$@"
-  tmux display -p "SOCKET: ${SOCKET}"
+  [[ "$1" ]] && local OUT="${1}" || local OUT="no data"
+  tmux display -p "${OUT}"
 }
 
 fatal() {
