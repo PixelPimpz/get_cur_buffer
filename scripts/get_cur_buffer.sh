@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 DEBUG=$1
 CURRENT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-ICONS="${CURRENT_DIR}../lib/app-icons.yml"
+ICONS="${CURRENT_DIR}/../lib/app-icons.yml"
 YQ_BIN='/usr/bin/yq'
 
 main() {
