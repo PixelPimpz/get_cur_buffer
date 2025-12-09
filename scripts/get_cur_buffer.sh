@@ -4,9 +4,9 @@ DEBUG=$1
 main() {
   local PANE_PID="$(tmux display -p "#{pane_pid}")"
   local SOCKET="/tmp/$(ls /tmp | grep -E "${PANE_PID}")"
-#  local BUF_NAME="$( nvim --server ${SOCKET} --remote-expr 'bufname("%:t")' )"
+  local BUF_NAME="$( nvim --server ${SOCKET} --remote-expr 'expand("%:t")' )"
+  #local BUF_NAME="$( nvim --server ${SOCKET} --remote-expr 'bufname("%:t")' )"
   if (( $DEBUG == 1 )); then 
-    debug "SOCK_GEN: ${SOCK_GEN}"
     debug "SOCKET: ${SOCKET}"
 #    [[ -n "${BUF_NAME}" ]] && fatal "bufname not found." || debug "${BUF_NAME}"
   fi
