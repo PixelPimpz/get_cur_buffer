@@ -14,7 +14,7 @@ main() {
     if (( $DEBUG == 1 )); then 
       debug "SOCKET: ${SOCKET}"
       debug "PROC: ${PROC}"
-      debug "ICON: ${ICON}"
+      debug "ICON: $I"
       [[ -n "${BUF_NAME}" ]] && debug "BUF_NAME: ${BUF_NAME}" || fatal "bufname not found."  
     fi
 
