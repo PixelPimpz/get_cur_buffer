@@ -16,7 +16,7 @@ main() {
 }
 
 set_status() {
-
+  local STATUS="crack"
 }
 
 debug() {
