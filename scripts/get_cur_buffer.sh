@@ -7,9 +7,9 @@ main() {
   tmux display -p "$(ls /tmp | grep "nvim" )"
 #  local BUF_NAME="$( nvim --server ${SOCKET} --remote-expr 'bufname("%:t")' )"
   if (( $DEBUG == 1 )); then 
-    debug "SOCK_GEN: ${SOCK_GEN}"
+    debug "SOCK_GEN: ${SOCK_GENi##*-}"
     debug "SOCKET: ${SOCKET}"
-    [[ -n "${BUF_NAME}" ]] && fatal "bufname not found." || debug "${BUF_NAME}"
+#    [[ -n "${BUF_NAME}" ]] && fatal "bufname not found." || debug "${BUF_NAME}"
   fi
 }
 
