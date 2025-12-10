@@ -27,7 +27,7 @@ main() {
       debug "PLUG_ROOT:~/${PLUG_ROOT#*/home*$USER/}"
       debug "SOCKET:${SOCKET}"
       debug "PROC:${PROC}"
-      debug "ICONS:${ICONS}"
+      debug "ICONS:~/${ICONS#*/home*$USER/}"
       debug "ICON:${ICON}"
       [[ -n "${BUF_NAME}" ]] && debug "BUF_NAME:${BUF_NAME}" || fatal "bufname not found."  
     fi
