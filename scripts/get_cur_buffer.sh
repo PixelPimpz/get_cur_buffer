@@ -24,12 +24,12 @@ main() {
     local BUF_NAME="$( nvim --server ${SOCKET} --remote-expr 'expand("%:t")' )"
     
     if (( $DEBUG == 1 )); then 
-      debug "PLUG_ROOT: ${PLUG_ROOT}"
-      debug "SOCKET: ${SOCKET}"
-      debug "PROC: ${PROC}"
-      debug "ICONS: ${ICONS}"
-      debug "ICON: ${ICON}"
-      [[ -n "${BUF_NAME}" ]] && debug "BUF_NAME: ${BUF_NAME}" || fatal "bufname not found."  
+      debug "PLUG_ROOT:${PLUG_ROOT}"
+      debug "SOCKET:${SOCKET}"
+      debug "PROC:${PROC}"
+      debug "ICONS:${ICONS}"
+      debug "ICON:${ICON}"
+      [[ -n "${BUF_NAME}" ]] && debug "BUF_NAME:${BUF_NAME}" || fatal "bufname not found."  
     fi
     set_status "${BUF_NAME}"
   fi
@@ -45,14 +45,13 @@ set_status() {
 
 debug() {
   [[ "$1" ]] && local OUT="${1}" || local OUT="no data"
-  printf '|  VAR       |  VALUE               |\n'
-  printf '|            |                      | \n'
   tmux display -p "${OUT}"
+  printf "| 12-%s | 23-%s |\n", "${OUT *\$}|" "${OUT}"
 }
 
 fatal() {
   [[ -n "$1" ]] && local E="unknown error" || local E="$1"
-  printf 'ERROR: %s\n' "$E" >&2
+  printf 'ERROR:%s\n' "$E" >&2
   exit 1
 }
 
