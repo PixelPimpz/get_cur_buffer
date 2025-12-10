@@ -37,6 +37,7 @@ main() {
 
 dummy() {
   echo "to the void" > /dev/null
+  echo "this is dumb"
 }
 
 set_status() {
@@ -49,8 +50,8 @@ set_status() {
 
 debug() {
   [[ "$1" ]] && local OUT="${1}" || local OUT="no data"
-  local FMT='%10s | %-56s'
-  printf "${FMT}\n" "${OUT%:*}" "${OUT#*:}"
+#  local FMT='%10s | %-56s'
+#  printf "${FMT}\n" "${OUT%:*}" "${OUT#*:}"
 }
 
 fatal() {
