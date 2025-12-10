@@ -45,6 +45,8 @@ set_status() {
 
 debug() {
   [[ "$1" ]] && local OUT="${1}" || local OUT="no data"
+  printf '|  VAR       |  VALUE               |\n'
+  printf '|            |                      | \n'
   tmux display -p "${OUT}"
 }
 
