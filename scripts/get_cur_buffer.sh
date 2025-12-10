@@ -45,7 +45,7 @@ set_status() {
 
 debug() {
   [[ "$1" ]] && local OUT="${1}" || local OUT="no data"
-  printf "| %12-s | %-33s |\n", "${OUT%:*}" "${OUT#*:}"
+  printf '| %12s | %33s |\n', "${OUT%:*}" "${OUT#*:}"
 }
 
 fatal() {
