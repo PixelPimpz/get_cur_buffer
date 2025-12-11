@@ -3,20 +3,18 @@ CURRENT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 PLUG_ROOT="${CURRENT_DIR%/*}"
 ICONS="${PLUG_ROOT}/lib/app-icons.yaml"
 YQ_BIN='/usr/bin/yq'
-
+if ! command -v "${YQ_BIN}" &> /dev/null; then
+  fatal "yq executable not found at ${YQ_BIN}."
+fi
 DEBUG=$1
 
 main() {
-  if ! command -v "${YQ_BIN}" &> /dev/null; then
-    fatal "yq executable not found at ${YQ_BIN}."
-  fi
   local PANE_PID="$(tmux display -p "#{pane_pid}")"
-  local PROC="$(ps -h --ppid "${PANE_PID}" -o cmd | head  -1 | awk '{print $1}')"  
   local SOCKET="/tmp/$(ls /tmp | grep -E "${PANE_PID}")"
+  local PROC="$(ps -h --ppid "${PANE_PID}" -o cmd | head  -1 | awk '{print $1}')"  
 
   if [[ "${PROC}" == "nvim" ]]; then
 
-    local ICON="$("${YQ_BIN}" '.icons.apps.nvim' "${ICONS}")"
     local YQ_EXIT=$?
     (( $YQ_EXIT != 0 )) && fatal "yq failed with code $YQ_EXIT. Check yaml for path & syntax."
 
@@ -25,6 +23,7 @@ main() {
     #local BUF_NAME="$( ps -o ${PANE_PID} -C comm= )"
     local BUF_NAME="what the actual fuck?"
   fi
+  local ICON="$("${YQ_BIN}" '.icons.apps.nvim' "${ICONS}")"
   if (( $DEBUG == 1 )); then 
     debug "PLUG_ROOT:~/${PLUG_ROOT#*/home*$USER/}"
     debug "SOCKET:${SOCKET}"
