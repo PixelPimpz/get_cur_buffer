@@ -16,7 +16,7 @@ main() {
 
   if [[ "${PROC}" == "nvim" ]]; then
 
-    local ICON="$("${YQ_BIN}" '.icons.nvim' "${ICONS}")"
+    local ICON="$("${YQ_BIN}" '.icons.apps.nvim' "${ICONS}")"
     local YQ_EXIT=$?
     (( $YQ_EXIT != 0 )) && fatal "yq failed with code $YQ_EXIT. Check yaml for path & syntax."
 
