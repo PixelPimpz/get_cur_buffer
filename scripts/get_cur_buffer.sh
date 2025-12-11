@@ -15,14 +15,13 @@ main() {
   if [ "${SOCKET}" ~= ${PANE_PID} ]; then
     local BUF_NAME="$( nvim --server ${SOCKET} --remote-expr 'expand("%:t")' )"
   else
-    local BUF_NAME="$( ps -o ${PANE_PID} -C comm= )"
-    # local BUF_NAME="what the actual fuck?"
+    #local BUF_NAME="$( ps -o ${PANE_PID} -C comm= )"
+    local BUF_NAME="what the actual fuck?"
   fi
 
   local PROC="$(ps -h --ppid "${PANE_PID}" -o cmd | head  -1 | awk '{print $1}')"  
   local ICON="$("${YQ_BIN}" '.icons.apps.nvim' "${ICONS}")"
-  local EXIT="$?" 
-  (( ${EXIT} != 0 )) && fatal "yq failed with code ${EXIT}. Check yaml for path & syntax."
+  local EXIT=$? && (( ${EXIT} != 0 )) && fatal "yq failed with code ${EXIT}. Check yaml for path & syntax."
 
   if (( $DEBUG == 1 )); then 
     debug "PLUG_ROOT:~/${PLUG_ROOT#*/home*$USER/}"
