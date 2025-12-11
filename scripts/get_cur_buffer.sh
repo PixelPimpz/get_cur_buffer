@@ -22,7 +22,8 @@ main() {
     local SOCKET="/tmp/$(ls /tmp | grep -E "${PANE_PID}")"
     local BUF_NAME="$( nvim --server ${SOCKET} --remote-expr 'expand("%:t")' )"
   else
-    local BUF_NAME="$( ps -o ${PANE_PID} -C comm= )"
+    #local BUF_NAME="$( ps -o ${PANE_PID} -C comm= )"
+    local BUF_NAME="what the actual fuck?"
   fi
   if (( $DEBUG == 1 )); then 
     debug "PLUG_ROOT:~/${PLUG_ROOT#*/home*$USER/}"
