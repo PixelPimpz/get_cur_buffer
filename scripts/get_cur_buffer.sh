@@ -13,6 +13,7 @@ main() {
   
   local PANE_PID="$(tmux display -p "#{pane_pid}")"
   PROC="$(ps -h --ppid "${PANE_PID}" -o cmd | head -n -1 | awk '{print $1}')"  
+  (( $DEBUG == 1 )) && debug "PROC:${PROC}"
   SOCKET=
   ICON=
   BUF_NAME=
