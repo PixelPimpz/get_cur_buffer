@@ -21,7 +21,7 @@ main() {
     SOCKET="N/A"
   fi
   #TODO: move ICON to if block and set app icon differntly if not NVIM
-  local ICON="$("${YQ_BIN}" '.icons.apps.nvim' "${ICONS}")"
+  local ICON="$("${YQ_BIN}" ".icons.apps.${PROC}" "${ICONS}")"
   local EXIT=$? && (( ${EXIT} != 0 )) && fatal "yq failed with code ${EXIT}. Check yaml for path & syntax."
 
   if (( $DEBUG == 1 )); then 
