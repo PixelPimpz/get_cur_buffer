@@ -12,10 +12,10 @@ main() {
   fi
   
   local PANE_PID="$(tmux display -p "#{pane_pid}")"
-  local PROC="$(ps -h --ppid "${PANE_PID}" -o cmd | head -n -1 | awk '{print $1}')"  
-  local SOCKET=
-  local ICON=
-  local BUF_NAME=
+  PROC="$(ps -h --ppid "${PANE_PID}" -o cmd | head -n -1 | awk '{print $1}')"  
+  SOCKET=
+  ICON=
+  BUF_NAME=
 
   if [[ "${PROC}" == "nvim" ]]; then
 
