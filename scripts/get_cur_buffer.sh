@@ -18,8 +18,9 @@ main() {
   else
     local PROC="$( ps -q ${PANE_PID} -o comm= )"
     local BUF_NAME="${PROC}"
+    SOCKET="N/A"
   fi
-
+  #TODO: move ICON to if block and set app icon differntly if not NVIM
   local ICON="$("${YQ_BIN}" '.icons.apps.nvim' "${ICONS}")"
   local EXIT=$? && (( ${EXIT} != 0 )) && fatal "yq failed with code ${EXIT}. Check yaml for path & syntax."
 
