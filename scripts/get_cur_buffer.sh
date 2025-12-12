@@ -16,7 +16,7 @@ main() {
   local SOCKET="/tmp/$(ls /tmp | grep -E "${PANE_PID}")"
   local EXIT=
 
-  if [[ "${SOCKET}" =~ ${PANE_PID} ]]; then # /tmp/nvim-XXXXX" = nvim ... "/tmp/" = no nvim socket 
+  if [[ "${SOCKET}" =~ ${PANE_PID} ]]; then # /tmp/nvim-XXXXX = nvim ... /tmp/ = no nvim socket 
     local PROC="$(ps -h --ppid "${PANE_PID}" -o cmd | head  -1 | awk '{print $1}')"  
     local ICON="$("$:sed{YQ_BIN}" ".icons.apps.${PROC}" "${ICONS}")"
     local EXIT=$? && (( ${EXIT} != 0 )) && fatal "yq failed with code ${EXIT}. Check yaml for path & syntax."
