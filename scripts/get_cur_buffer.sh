@@ -11,18 +11,21 @@ DEBUG=$1
 main() {
   local PANE_PID="$(tmux display -p "#{pane_pid}")"
   local SOCKET="/tmp/$(ls /tmp | grep -E "${PANE_PID}")"
+  local EXIT=
 
   if [[ "${SOCKET}" =~ ${PANE_PID} ]]; then
     local PROC="$(ps -h --ppid "${PANE_PID}" -o cmd | head  -1 | awk '{print $1}')"  
+    local ICON="$("${YQ_BIN}" ".icons.apps.${PROC}" "${ICONS}")"
+    local EXIT=$? && (( ${EXIT} != 0 )) && fatal "yq failed with code ${EXIT}. Check yaml for path & syntax."
     local BUF_NAME="$( nvim --server ${SOCKET} --remote-expr 'expand("%:t")' )"
   else
     local PROC="$( ps -q ${PANE_PID} -o comm= )"
+    local ICON="$("${YQ_BIN}" ".icons.apps.${PROC}" "${ICONS}")"
+    local EXIT=$? && (( ${EXIT} != 0 )) && fatal "yq failed with code ${EXIT}. Check yaml for path & syntax."
     local BUF_NAME="${PROC}"
     SOCKET="N/A"
   fi
   #TODO: move ICON to if block and set app icon differntly if not NVIM
-  local ICON="$("${YQ_BIN}" ".icons.apps.${PROC}" "${ICONS}")"
-  local EXIT=$? && (( ${EXIT} != 0 )) && fatal "yq failed with code ${EXIT}. Check yaml for path & syntax."
 
   if (( $DEBUG == 1 )); then 
     debug "PLUG_ROOT:~/${PLUG_ROOT#*/home*$USER/}"
