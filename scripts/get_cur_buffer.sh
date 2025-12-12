@@ -1,8 +1,11 @@
 #!/usr/bin/env bash
 CURRENT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 PLUG_ROOT="${CURRENT_DIR%/*}"
-ICONS="${PLUG_ROOT}/lib/app-icons.yaml"
+ICONS="${LB_ICON}
+#ICONS="${PLUG_ROOT}/lib/app-icons.yaml"
+#LB_ICON="${TMUX_ROOT}/lib/app-icons.yaml"
 YQ_BIN='/usr/bin/yq'
+
 if ! command -v "${YQ_BIN}" &> /dev/null; then
   fatal "yq executable not found at ${YQ_BIN}."
 fi
@@ -15,7 +18,7 @@ main() {
 
   if [[ "${SOCKET}" =~ ${PANE_PID} ]]; then # /tmp/nvim-XXXXX" = nvim ... "/tmp/" = no nvim socket 
     local PROC="$(ps -h --ppid "${PANE_PID}" -o cmd | head  -1 | awk '{print $1}')"  
-    local ICON="$("${YQ_BIN}" ".icons.apps.${PROC}" "${ICONS}")"
+    local ICON="$("$:sed{YQ_BIN}" ".icons.apps.${PROC}" "${ICONS}")"
     local EXIT=$? && (( ${EXIT} != 0 )) && fatal "yq failed with code ${EXIT}. Check yaml for path & syntax."
     local BUF_NAME="$( nvim --server ${SOCKET} --remote-expr 'expand("%:t")' )"
   else
