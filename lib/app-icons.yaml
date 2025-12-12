@@ -4,6 +4,31 @@ config:
   show-name: true
 
 icons:
+  digit:
+    one: "󰲡"
+    two: "󰲣"
+    three: "󰲥"
+    four: "󰲧"
+    five: "󰲩"
+    six: "󰲫"
+    seven: "󰲭"
+    eight: "󰲯"
+    nine: "󰲱"
+    ten: "󰿭"
+  system:
+    document: ""
+    txtdoc: ""
+    alert: "󰀨"
+    warning: ""
+    error: ""
+    reload: "󱍷"
+    check: "󰗠"
+    cancel: "󰅙"
+    delete: "󰚃"
+    add: ""
+    subtract: ""
+    alarm: "󰵚"
+    info: ""
   apps:
     apt: ""
     bash: ""
