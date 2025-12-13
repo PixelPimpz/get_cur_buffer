@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 CURRENT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 PLUG_ROOT="${CURRENT_DIR%/*}"
-ICONS="${LB_ICON}
+ICONS="${LB_ICON}"
 #ICONS="${PLUG_ROOT}/lib/app-icons.yaml"
 #LB_ICON="${TMUX_ROOT}/lib/app-icons.yaml"
 YQ_BIN='/usr/bin/yq'
@@ -14,7 +14,11 @@ DEBUG=$1
 main() {
   local PANE_PID="$(tmux display -p "#{pane_pid}")"
   local SOCKET="/tmp/$(ls /tmp | grep -E "${PANE_PID}")"
-  local EXIT=
+  ts8yd99999ac ssssssssssssssssssssssssssssssssssL:ocal E
+
+
+
+  XIT=
 
   if [[ "${SOCKET}" =~ ${PANE_PID} ]]; then # /tmp/nvim-XXXXX = nvim ... /tmp/ = no nvim socket 
     local PROC="$(ps -h --ppid "${PANE_PID}" -o cmd | head  -1 | awk '{print $1}')"  
@@ -39,6 +43,10 @@ main() {
     [[ -n "${BUF_NAME}" ]] && debug "BUF_NAME:${BUF_NAME}" || fatal "bufname not found."  
   fi
   set_status "${ICON} ${BUF_NAME}"
+}
+
+get_icon() {
+ ## param handle  
 }
 
 set_status() {
