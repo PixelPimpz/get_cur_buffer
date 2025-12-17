@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
-CURRENT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+tmux setenv "@PLUG_ROOT" "$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 tmux setenv "@LIB_ICON" "$TMUX_ROOT/lib/app-icons.yaml"
-source $CURRENT_DIR/lib/localhooks.conf
-tmux bind M-t run-shell "$CURRENT_DIR/scripts/get_cur_buffer.sh 1"
-tmux bind M-y run-shell "$CURRENT_DIR/scripts/getIcon.sh "${TMUX_ROOT}/lib/app-icons.yaml""
+PLUG_ROOT="$(tmux display "#{@PLUG_ROOT}")
+source $PLUG_ROOT/lib/localhooks.conf
+tmux bind M-t run-shell "$PLUG_ROOT/scripts/get_cur_buffer.sh 1"
+tmux bind M-y run-shell "$PLUG_ROOT/scripts/getIcon.sh "$(tmux display -p "#{@LIB_ICON}")""
 
