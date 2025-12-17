@@ -6,5 +6,6 @@ tmux setenv "@LIB_ICON" "$TMUX_ROOT/lib/app-icons.yaml"
 $PLUG_ROOT/lib/localhooks.sh
 $PLUG_ROOT/scripts/get_cur_buffer.sh
 if [[ $(tmux display -p "#{@FIRSTRUN}") == 'true' ]]; then
+  tmux setenv -u "@FIRSTRUN"
   tmux source "$TMUX_ROOT/tmux.conf"
 fi
