@@ -6,10 +6,9 @@ if ! command -v "${YQBIN}" &> /dev/null; then
   fatal "yq executable not found at ${YQBIN}."
 fi
 
-tmux display "$ICONS"
 
 main() {
-
+  tmux display "$ICONS"
 }
 
 fatal() {
@@ -17,3 +16,5 @@ fatal() {
   printf 'ERROR: %s \n' $out
   exit 1
 }
+
+main
