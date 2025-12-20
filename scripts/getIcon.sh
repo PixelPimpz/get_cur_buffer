@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 local icons="$(tmux display "#{@LIB_ICON}" )"
+tmux display "#{@LIB_ICON}"
 local yqbin="/usr/bin/yq"
 if ! command -v "${}" &> /dev/null; then
   fatal "yq executable not found at ${yqbin}."
