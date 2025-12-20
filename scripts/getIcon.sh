@@ -24,15 +24,15 @@ main() {
   debug "PLUG_ROOT:" "${PLUG_ROOT}" 
 	debug "YQBIN:" "${YQBIN}" 
 	debug "ICON:" "${ICON}" 
-  debug "OUT:" "${out}"
 	fi
   ## send ICON to stdout
   out "${ICON}"
 }
 
 out() {
-  ##echo "${ICON}"
-  echo ">>$1"
+  local O="$1"
+  debug "OUT:" "${O}"
+  echo "$O"
 }
 
 debug() {
