@@ -3,8 +3,8 @@
 DEBUG=1
 ICON_NAME="$1"
 ## frequently used var/val
-PLUG_ROOT="$( tmux display "#{@PLUG_ROOT}" )"
-ICONS="$( tmux display-message -p "#{@LIB_ICON}" )"
+PLUG_ROOT="$( tmux display -p "#{@PLUG_ROOT}" )"
+ICONS="$( tmux display -p "#{@LIB_ICON}" )"
 YQBIN="/usr/bin/yq"
 if ! command -v "${YQBIN}" &> /dev/null; then
   fatal "yq executable not found at ${YQBIN}."
@@ -14,18 +14,22 @@ fi
 ## Start main 
 main() {
   [[ -z "$ICON_NAME" ]] && fatal 'ICON_MANE is null'
-  local icon="$( yq '.icons.[].warning' < $ICONS | grep -v null )"
+  local ICON="$( yq ".icons.[].${ICON_NAME}" < $ICONS | grep -v null )"
   
 	if (( $DEBUG != 0 )); then
-	  debug "ICON_NAME" "${ICON_NAME}" 
+  echo "   [VARIABLE] | [VALUE] "
+  echo "------------------------"
+	debug "ICON_NAME" "${ICON_NAME}" 
+  debug "PLUG_ROOT" "${PLUG_ROOT}" 
+	debug "YQBIN" "${YQBIN}" 
+	debug "ICON" "${ICON}" 
 	fi
 }
 
 debug() {
   local var="$1"
   local val="$2"
-  echo "=======[debug]======="
-  printf '%10s | %s\n' $var $val
+  printf '%13s | %s\n' $var $val
 }
 
 ## utility helpers
