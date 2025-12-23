@@ -11,17 +11,17 @@ DEBUG=$1
 main() {
   local PANE_PID="$(tmux display -p "#{pane_pid}")"
   local SOCKET="/tmp/$(ls /tmp | grep -E "${PANE_PID}")"
+  local CHILD_PROC="$(ps -o comm= --ppid "${PANE_PID}")"
+  local PARENT_PROC="$(ps -q "${PANE_PID}")"
 
   if [[ "${SOCKET}" =~ ${PANE_PID} ]]; then # /tmp/nvim-XXXXX = nvim ... /tmp/ = no nvim socket 
-    local PROC="$(ps -h --ppid "${PANE_PID}" -o cmd | head  -1 | awk '{print $1}')"  
-    local ICON="$( yq e ".icons.apps.${PROC}" $ICONS )"
+    local ICON="$( yq e ".icons.apps.${CHILD_PROC}" $ICONS )"
     local EXIT=$? && (( ${EXIT} != 0 )) && fatal "yq failed with code ${EXIT}. Check yaml for path & syntax."
     local BUF_NAME="$( nvim --server ${SOCKET} --remote-expr 'expand("%:t")' )"
   else
-    local PROC="$( ps -q ${PANE_PID} -o comm= )"
-    local ICON="$("${YQBIN}" ".icons.apps.${PROC}" "${ICONS}")"
+    local ICON="$("${YQBIN}" ".icons.apps.${PARENT_PROC}" "${ICONS}")"
     local EXIT=$? && (( ${EXIT} != 0 )) && fatal "yq failed with code ${EXIT}. Check yaml for path & syntax."
-    local BUF_NAME="${PROC}"
+    local BUF_NAME="${PARENT_PROC}"
     SOCKET="none"
   fi
 
@@ -29,13 +29,13 @@ main() {
     debug "PLUG_ROOT:~/${PLUG_ROOT#*/home*$USER/}"
     debug "PANE_PID:${PANE_PID}"
     debug "SOCKET:${SOCKET}"
-    debug "PROC:${PROC}"
+    debug "CHILD_PROC:${PARENT_PROC}"
+    debug "PARENT_PROC:${PARENT_PROC}"
     debug "ICONS:~/${ICONS#*/home*$USER/}"
     debug "ICON:${ICON}"
     [[ -n "${BUF_NAME}" ]] && debug "BUF_NAME:${BUF_NAME}" || fatal "bufname not found."  
   fi
   set_status "${ICON} ${BUF_NAME}"
-  tmux setenv "@FIRSTRUN" 'false' 
 }
 
 set_status() {
