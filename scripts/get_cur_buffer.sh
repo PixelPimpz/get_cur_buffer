@@ -13,8 +13,6 @@ main() {
   local SOCKET="/tmp/$(ls /tmp | grep -E "${PANE_PID}")"
   local CHILD_PROC="$(ps -o comm= --ppid "${PANE_PID}")"
   local PARENT_PROC="$(ps -q "${PANE_PID}" o comm=)"
-  tmux display -p "proc 1: ${CHILD_PROC}"
-  tmux display -p "proc 2: ${PARENT_PROC}"
 
   if [[ "${SOCKET}" =~ ${PANE_PID} ]]; then # /tmp/nvim-XXXXX = nvim ... /tmp/ = no nvim socket 
     local ICON="$( yq e ".icons.apps.${CHILD_PROC}" $ICONS )"
