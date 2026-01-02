@@ -1,10 +1,8 @@
-/ "get\_cur\_buffer"
+# tmux-nvim-info
 
-A sort of simple plugin for tmux that uses nvim remote to fetch useful metadata for use in tmux 
-UI elements. 
+### This plugin will be replaced with "tmux-metaphile" when I get the mechanics of this figured out. 
 
-This is a second attempt and is mainly for my own curiosity, learning and who knows? Maybe it 
-will prove useful.
+the idea of tmux-metaphile is to grab metadata about files open in (Neo)Vim for use in tmux, primarily the status bar. This plug-in is the part that grabs the file name of the currently open buffer in a pane/window running (Neo)Vim.
 
 We shall see.
 Now on with the show
