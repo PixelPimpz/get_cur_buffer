@@ -9,4 +9,5 @@ tmux setenv "@LIB_ICON" "$TMUX_ROOT/lib/app-icons.yaml"
 tmux setenv -u '@PLUG_ROOT'
 tmux setenv '@PLUG_ROOT' "$CURRENT_DIR"
 "$CURRENT_DIR/lib/localhooks.sh"
+sleep 2
 "$CURRENT_DIR/scripts/tmux-nvim-info.sh"
