@@ -25,7 +25,7 @@ main() {
   fi
 
   if (( DEBUG == 1 )); then 
-    debug "PLUG_ROOT:~/${PLUG_ROOT#*/home*$USER/}"
+    debug "PLUG_ROOT:$PLUG_ROOT"
     debug "PANE_PID:${PANE_PID}"
     debug "SOCKET:${SOCKET}"
     debug "CHILD_PROC:${PARENT_PROC}"
