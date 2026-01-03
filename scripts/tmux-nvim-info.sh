@@ -21,6 +21,7 @@ main() {
     local ICON="$("${YQBIN}" ".icons.apps.${PARENT_PROC}" "${ICONS}")"
     local EXIT=$? && (( ${EXIT} != 0 )) && fatal "yq failed with code ${EXIT}. Check yaml for path & syntax."
     local BUF_NAME="${PARENT_PROC}"
+    local STATUS="$ICON $BUF_NAME"
     SOCKET="none"
   fi
 
@@ -32,9 +33,11 @@ main() {
     debug "PARENT_PROC:${PARENT_PROC}"
     debug "ICONS:~/${ICONS#*/home*$USER/}"
     debug "ICON:${ICON}"
+    debug "STATUS:$STATUS"
     [[ -n "${BUF_NAME}" ]] && debug "BUF_NAME:${BUF_NAME}" || fatal "bufname not found."  
   fi
   set_status "${ICON} ${BUF_NAME}"
+  debug "$
 }
 
 set_status() {
