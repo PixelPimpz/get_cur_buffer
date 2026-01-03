@@ -25,7 +25,7 @@ main() {
     SOCKET="none"
   fi
 
-  if (( $DEBUG == 1 )); then 
+  if (( DEBUG == 1 )); then 
     debug "PLUG_ROOT:~/${PLUG_ROOT#*/home*$USER/}"
     debug "PANE_PID:${PANE_PID}"
     debug "SOCKET:${SOCKET}"
