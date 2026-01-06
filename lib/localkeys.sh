@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 echo "localkeys..."
-tmux display -p "localkeys.sh running..."
+tmux display  "localkeys.sh running..."
