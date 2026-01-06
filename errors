@@ -1,2 +1,0 @@
-    local PROC="$(ps -h --ppid "${PANE_PID}" -o cmd | head  -1 | awk '{print $1}')"  
-    local PROC="$( ps -q ${PANE_PID} -o comm= )"
