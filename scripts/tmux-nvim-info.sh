@@ -5,7 +5,6 @@ PLUG_ROOT=$( tmux display -p "#{@PLUG_ROOT}" )
 if ! command -v "${YQBIN}" &> /dev/null; then
   fatal "yq executable not found at ${YQBIN}."
 fi
-DEBUG=$(tmux show -gqv @DEBUG})
 
 main() {
   local PANE_PID="$(tmux display -p "#{pane_pid}")"
@@ -25,17 +24,17 @@ main() {
     SOCKET="none"
   fi
 
-  if (( DEBUG == 1 )); then 
-    debug "PLUG_ROOT:$PLUG_ROOT"
-    debug "PANE_PID:${PANE_PID}"
-    debug "SOCKET:${SOCKET}"
-    debug "CHILD_PROC:${PARENT_PROC}"
-    debug "PARENT_PROC:${PARENT_PROC}"
-    debug "ICONS:~/${ICONS#*/home*$USER/}"
-    debug "ICON:${ICON}"
-    debug "STATUS:${STATUS}"
-    [[ -n "${BUF_NAME}" ]] && debug "BUF_NAME:${BUF_NAME}" || fatal "bufname not found."  
-  fi
+  debug "PLUG_ROOT:$PLUG_ROOT"
+  debug "PANE_PID:${PANE_PID}"
+  debug "SOCKET:${SOCKET}"
+  debug "CHILD_PROC:${PARENT_PROC}"
+  debug "PARENT_PROC:${PARENT_PROC}"
+  debug "ICONS:~/${ICONS#*/home*$USER/}"
+  debug "ICON:${ICON}"
+  debug "STATUS:${STATUS}"
+  [[ -n "${BUF_NAME}" ]] && debug "BUF_NAME:${BUF_NAME}" || fatal "bufname not found."  
+
+  ## set status bar 
   set_status "${ICON} ${BUF_NAME}"
 }
 
@@ -53,9 +52,11 @@ set_status() {
 }
 
 debug() {
-  [[ "$1" ]] && local OUT="${1}" || local OUT="no data"
-  local FMT=' %10s | %-56s '
-  printf "${FMT}\n" "${OUT%:*}" "${OUT#*:}"
+  if (( $(tmux show -gqv @DEBUG) == 1 )); then
+    [[ "$1" ]] && local OUT="${1}" || local OUT="no data"
+    local FMT=' %10s | %-56s '
+    printf "${FMT}\n" "${OUT%:*}" "${OUT#*:}"
+  fi
 }
 
 fatal() {
