@@ -32,7 +32,7 @@ main() {
   debug "ICONS:~/${ICONS#*/home*$USER/}"
   debug "ICON:${ICON}"
   debug "STATUS:${STATUS}"
-  debug "STATUS-RIGHT:#{status-right}"
+  debug "STATUS-RIGHT:#{E:status-right}"
 
   ## set status bar 
   set_status "${ICON} ${BUF_NAME}"
