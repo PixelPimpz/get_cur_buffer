@@ -55,6 +55,7 @@ debug() {
     [[ "$1" ]] && local OUT="${1}" || local OUT="no data"
     local FMT=' %10s | %-56s '
     printf "${FMT}\n" "${OUT%:*}" "${OUT#*:}"
+    tmux display -p "sr: #{status-right}"
   fi
 }
 
