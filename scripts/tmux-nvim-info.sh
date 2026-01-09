@@ -33,7 +33,6 @@ main() {
   debug "ICON:${ICON}"
   debug "STATUS:${STATUS}"
 
-  tmux display -p "#{E:#{E:status-right}}"  
   ## set status bar 
   set_status "${ICON} ${BUF_NAME}"
 }
