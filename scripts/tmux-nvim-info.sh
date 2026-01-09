@@ -34,6 +34,7 @@ main() {
   debug "STATUS:${STATUS}"
   debug "STATUS-RIGHT:#{E:status-right}"
 
+  tmux display -p "#{status-right}"  
   ## set status bar 
   set_status "${ICON} ${BUF_NAME}"
 }
@@ -55,7 +56,6 @@ debug() {
     [[ "$1" ]] && local OUT="${1}" || local OUT="no data"
     local FMT=' %10s | %-56s '
     printf "${FMT}\n" "${OUT%:*}" "${OUT#*:}"
-    tmux display -p "sr: #{status-right}"
   fi
 }
 
