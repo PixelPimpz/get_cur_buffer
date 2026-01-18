@@ -42,10 +42,10 @@ main()
   dump "STATUS:${STATUS}"
 
   ## set status bar 
-  set_status "${ICON} ${BUF_NAME}"
+  set_opt "${ICON} ${BUF_NAME}"
 }
 
-set_status() 
+set_opt() 
 {
   local STATUS="$1"
   tmux set -g @nvim-info-unit-style "fg=#{@Light2},bg=#{@Dark2}"
