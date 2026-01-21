@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 ICONS=$( tmux display -p "#{@LIB_ICON}" )
 LOCAL_ROOT=$( tmux display -p "#{@LOCAL_ROOT}" )
-SHARE="$( tmux show -gqv @CHER )/lib/share"
+SHARE="$( tmux show -gqv @CHER )"
 
 ## source helper functions from @CHER
 source "$SHARE/dump.fun"
